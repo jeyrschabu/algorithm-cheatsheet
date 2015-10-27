@@ -1,9 +1,14 @@
 Hashtable
 ==========
 
+NOTES:
+- Open Addressing, Chaining, Linear Probe
+- Avoid collisions using Chaining
+- O(n) for worst case scenario for insertion, search and delete
+
 Implementations (integer dictionary):
 
-```
+``
 public class HashMap {
     private final static int TABLE_SIZE = 128;
     HashEntry[] table;
