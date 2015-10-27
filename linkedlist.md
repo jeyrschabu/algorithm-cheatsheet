@@ -8,7 +8,7 @@ LinkedList
 - Node printNthToLast(Node head, int n)
 - Node reverseNthNodeFromLast(Node head, int n)
 - Node mergeSortedList(Node l1, Node l2)
-- Node removeDups(Node head)
+- Node removeDuplicates(Node head)
 - boolean removeRestricted(Node node, int data)
 - Node partitionList(Node head, int data)
 - Node sumTwoLists(Node first, Node last)
