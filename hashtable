@@ -10,7 +10,7 @@ public class HashMap {
     HashMap() {
         table = new HashEntry[TABLE_SIZE];
         for (int i = 0; i < TABLE_SIZE; i++)
-            table[i] = null;
+            table[i] = -1;
     }
 
     public int get(int key) {
@@ -37,7 +37,53 @@ public class HashMap {
         }
     }
 }
+```
 
+OR
+
+```
+class HashMap<K, V> {
+    final static int MAX = 128;
+    Entry[] table;
+    HashMap() {
+        table = new Entry[MAX];
+        for (int i =0; i < MAX; i++) {
+            table[i] = null;
+        }
+    }
+
+    void put(K key, V value) {
+        int hash = key.hashCode() % MAX;
+        if (table[hash] == null) table[hash] = new Node(key, value, null);
+        else {
+            Node current = table[hash];
+            while (current.next != null && current.key != key) current = current.next;
+            current.next = new Node(key, value, null);
+        }
+    }
+
+    V get(K key) {
+        int hash = key.hashCode() % MAX;
+        if (table[hash] == null) return null;
+
+        Node current = table[hash];
+        while (current.next != null && current.key != key) current = current.next;
+
+        return (current != null && current.key == key) ? current.key ; null;
+    }
+
+    static class Node<K, V> {
+        K key;
+        V value;
+        Node next;
+
+        Node (K key, V value, Node next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+    }
+}
 ```
 
 Operations:
