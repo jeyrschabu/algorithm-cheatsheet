@@ -58,7 +58,8 @@ class HashMap<K, V> {
         else {
             Node current = table[hash];
             while (current.next != null && current.key != key) current = current.next;
-            current.next = new Node(key, value, null);
+            if (current.key == key) current.value = value;
+            else current.next = new Node(key, value, null);
         }
     }
 
@@ -69,7 +70,24 @@ class HashMap<K, V> {
         Node current = table[hash];
         while (current.next != null && current.key != key) current = current.next;
 
-        return (current != null && current.key == key) ? current.key ; null;
+        return (current.key == key) ? current.value ; null;
+    }
+
+    void remove(K key) {
+        int hash = key.hashCode() % MAX;
+        if (table[hash] == null) return;
+        Node current = table[hash];
+        Node previous = null;
+
+        while (current.next != null && current.key != key) {
+            previous = current;
+            current = current.next;
+        }
+
+        if (current.key == key) {
+            if (previous == null) table[hash] = current.next;
+            else previous.next = current.next;
+        }
     }
 
     static class Node<K, V> {
