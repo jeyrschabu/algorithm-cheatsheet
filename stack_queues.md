@@ -6,64 +6,61 @@ PROPERTIES:
 - Stack => LIFO (Last In First Out)
 - Queues => FIFO (First In First Out)
 
-Implimentation #1: Using an Array
+Implementation #1: Using an Array
 
 //stack of Integers
 
-
-class Stack{
-
+```
+class Stack {
 	int [] s;
-	
 	int top = -1;
 	
-	public Stack(int max){
+	public Stack(int max) {
 		s = new Int[max];
 	}
 	
-	boolean isEmpty(){
+	boolean isEmpty() {
 		return top < 0;
 	}
 	
-	void push(int data){
+	void push(int data) {
 		s[++top] = data;
 	}
-	void pop(){
+	void pop() {
 		return s[top--];
 	}
 	
 }
+```
 
-Implimentation #2: Using a linkedlist
+Implementation #2: Using a Linked list
 
-class Stack{
+```
+class Stack {
 	int n;
 	Node first;
-	
-	class Node{
+	class Node {
 		int data;
 		Node next;
-		public Node(int d, Node t){
+		public Node(int d, Node t) {
 			data = d;
 			next = t;
 		}
 	}
 	
-	boolean isEmpty(){
+	boolean isEmpty() {
 		return first == null;
 	}
-	int size(){
+	
+	int size() {
 		return n;
 	}
-	void push(int data){
+	
+	void push(int data) {
 		Node current = first;
 		first = new Node(data);
 	}
-	
-
 }
+
 SUMMARY:
 	1. 	void add(Node head, int data)
-	
-	
-	

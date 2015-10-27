@@ -16,6 +16,7 @@ LinkedList
 - Node firstNodeInLoop(Node head)
 - boolean isPalindrome(Node head)
 
+```
 class Node {
 	int data;
 	Node next;
@@ -24,10 +25,12 @@ class Node {
 		this.next = null;
 	}
 }
+```
 
 [ADD]
 
 - iterative
+```
 void add(Node head, int data) {
 	Node current = head;
 	if (current == null) {
@@ -37,9 +40,10 @@ void add(Node head, int data) {
 	while(current.next != null) current = current.next;
 	current.next = new Node(data, null);
 }
-
+```
 - recursive
 
+```
 void add(Node head, int data) {
 	Node current = head; 
 	if (current == null) {
@@ -49,14 +53,17 @@ void add(Node head, int data) {
 	}
 	add(current.next, data);
 }
+```
 
+```
 //add first
-void addFirst(int data, Node head){
+void addFirst(int data, Node head) {
 	Node current = new Node(data);
 	current.next = head;
 	//update the head
 	head = current;
 }
+```
 [/ADD]
 
 [SEARCH]
