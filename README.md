@@ -1,3 +1,5 @@
 # algorithm-cheatsheet
 
-DataStructures and algorithms
+Data structures and algorithms
+Sample code snippets, Pseudo code ect...
+

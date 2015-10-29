@@ -1,4 +1,4 @@
-Hashtable
+HashMaps
 ==========
 
 NOTES:
@@ -8,7 +8,7 @@ NOTES:
 
 Implementations (integer dictionary):
 
-``
+```
 public class HashMap {
     private final static int TABLE_SIZE = 128;
     HashEntry[] table;
@@ -17,22 +17,18 @@ public class HashMap {
         for (int i = 0; i < TABLE_SIZE; i++)
             table[i] = -1;
     }
-
     public int get(int key) {
         int hash = (key % TABLE_SIZE);
         while (table[hash] != null && table[hash].key != key)
             hash = (hash + 1) % TABLE_SIZE;
-
         return (table[hash] == null) ? return -1 : return table[hash].value;
     }
-
     public void put(int key, int value) {
         int hash = (key % TABLE_SIZE);
         while (table[hash] != null && table[hash].key != key)
             hash = (hash + 1) % TABLE_SIZE;
             table[hash] = new HashEntry(key, value);
     }
-
     static class HashEntry{
         int key;
         int value;
@@ -56,7 +52,6 @@ class HashMap<K, V> {
             table[i] = null;
         }
     }
-
     void put(K key, V value) {
         int hash = key.hashCode() % MAX;
         if (table[hash] == null) table[hash] = new Node(key, value, null);
@@ -67,39 +62,31 @@ class HashMap<K, V> {
             else current.next = new Node(key, value, null);
         }
     }
-
     V get(K key) {
         int hash = key.hashCode() % MAX;
         if (table[hash] == null) return null;
-
         Node current = table[hash];
         while (current.next != null && current.key != key) current = current.next;
-
         return (current.key == key) ? current.value ; null;
     }
-
     void remove(K key) {
         int hash = key.hashCode() % MAX;
         if (table[hash] == null) return;
         Node current = table[hash];
         Node previous = null;
-
         while (current.next != null && current.key != key) {
             previous = current;
             current = current.next;
         }
-
         if (current.key == key) {
             if (previous == null) table[hash] = current.next;
             else previous.next = current.next;
         }
     }
-
     static class Node<K, V> {
         K key;
         V value;
         Node next;
-
         Node (K key, V value, Node next) {
             this.key = key;
             this.value = value;
@@ -111,3 +98,4 @@ class HashMap<K, V> {
 
 Operations:
 - search(D, k): Given a key k, return a pointer to the element in the dictionary D whose key value is k, if one exists
+
