@@ -21,6 +21,7 @@ class Node<V> {
         this.right = right;
         this.value = value;
     }
+    void print(){}
 }
 ```
 
@@ -28,11 +29,30 @@ class Node<V> {
 
 ![alt text](assets/InOrderTraversalBinaryTree.jpg "Inorder traversal")
 ```
+//recursive
 void inorder(Node node) {
     if (node != null) {
         inorder(node.left);
-        System.out.println(node);
+        node.print();
         inorder(node.right);
+    }
+}
+```
+
+```
+//iterative
+void inorder(Node root) {
+    Stack<Node> stack = new Stack<>();
+    Node current = root;
+    while (!stack.isEmpty() || current != null) {
+        if (current != null) {
+            stack.push(current);
+            current = current.left;
+        } else {
+            Node n = stack.pop();
+            n.print();
+            current = n.right;
+        }   
     }
 }
 ```
