@@ -3,9 +3,11 @@ Binary Search Tree
 
 NOTES:
 - BST property is such that a node's left subtree value is always at most its value
-Node x, left(x) =< x. Also right(x) > x
+- Node x, left(x) =< x. Also right(x) > x
 
 Implementations:
+
+
 
 ```
 class Node<V> {
@@ -23,9 +25,8 @@ class Node<V> {
 ```
 
 [INORDER TREE WALK]
-NOTE:
-In order tree traversal. Prints sorted tree nodes using the BST property
 
+![alt text](assets/InOrderTraversalBinaryTree.jpg "Inorder traversal")
 ```
 void inorder(Node node) {
     if (node != null) {
