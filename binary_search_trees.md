@@ -83,3 +83,22 @@ Node search(Node root, int value) {
 
 [/SEARCH]
 
+[MIN]
+```
+//recursive
+Node min(Node root) {
+    if (root == null) return null;
+    return min(root.left);
+}
+```
+
+```
+//iterative
+Node min(Node root) {
+    if (root != null) return null;
+    while (root.left != null) current = current.left;
+    return current;
+}
+```
+[/MIN]
+
