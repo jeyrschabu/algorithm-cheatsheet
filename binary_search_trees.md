@@ -58,3 +58,28 @@ void inorder(Node root) {
 ```
 [\INORDER TREE WALK]
 
+[SEARCH]
+```
+//recursive
+Node search(Node root, int value) {
+    if (root == null || root.value == value) return root;
+    if (value <= root.value) return search(root.left, value);
+    else return search(root.right, value);
+}
+```
+
+```
+//iterative
+Node search(Node root, int value) {
+    if (root == null || root.value == value) return root;
+    Node current = root;
+    while (current != null && current.value != value) {
+        if (value <= current.value) current = current.left;
+        else current = current.right;
+    }
+    return current;
+}
+```
+
+[/SEARCH]
+
