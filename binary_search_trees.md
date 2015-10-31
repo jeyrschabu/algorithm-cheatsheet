@@ -85,6 +85,7 @@ Node search(Node root, int value) {
 
 [MIN]
 ```
+// For max, look right
 //recursive
 Node min(Node root) {
     if (root == null) return null;
@@ -101,4 +102,17 @@ Node min(Node root) {
 }
 ```
 [/MIN]
+
+[SUCCESSOR]
+```
+Node successor(Node node) {
+    if (node != null && node.left != null) return min(node.right);
+    Node p = node.parent;
+    while (p != null && node == p.right) {
+        node = p
+        p = p.parent
+    }
+}
+```
+[/SUCCESSOR]
 
