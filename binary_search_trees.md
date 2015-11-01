@@ -61,6 +61,7 @@ void inorder(Node root) {
 [SEARCH]
 ```
 //recursive
+//O(h)
 Node search(Node root, int value) {
     if (root == null || root.value == value) return root;
     if (value <= root.value) return search(root.left, value);
@@ -70,6 +71,7 @@ Node search(Node root, int value) {
 
 ```
 //iterative
+//O(h)
 Node search(Node root, int value) {
     if (root == null || root.value == value) return root;
     Node current = root;
@@ -86,6 +88,7 @@ Node search(Node root, int value) {
 [MIN]
 ```
 // For max, look right
+//O(h)
 //recursive
 Node min(Node root) {
     if (root == null) return null;
@@ -95,6 +98,7 @@ Node min(Node root) {
 
 ```
 //iterative
+//O(h)
 Node min(Node root) {
     if (root != null) return null;
     while (root.left != null) current = current.left;
@@ -105,14 +109,34 @@ Node min(Node root) {
 
 [SUCCESSOR]
 ```
+//O(h)
 Node successor(Node node) {
     if (node != null && node.left != null) return min(node.right);
     Node p = node.parent;
     while (p != null && node == p.right) {
-        node = p
-        p = p.parent
+        node = p;
+        p = p.parent;
     }
 }
 ```
 [/SUCCESSOR]
+
+[INSERT]
+```
+void insert(Node root, Node n) {
+    Node current = root;
+    Node trailer;
+    while (current != null) {
+        trailer = current;
+        if (n.value <= current.value) current = current.left;
+        else current = current.right;
+    }
+    n.parent = trailer;
+    if (trailer == null) root = n
+    else 
+        if (n.value < trailer.value) trailer.left = n;
+        else trailer.right = n;
+}
+```
+[/INSERT]
 
