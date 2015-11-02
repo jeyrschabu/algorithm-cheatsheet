@@ -11,6 +11,7 @@ the number of elements on each side. (elements on left are smaller and elements 
 
 
 Implementations:
+
 [RANK]
 
 ```
@@ -26,6 +27,7 @@ int rank(int[] array, int left, int right, int rank) {
 }
 ```
 [/RANK]
+
 [PARTITION]
 ```
 int partition(int[] array, int left, int right, int pivot) {
