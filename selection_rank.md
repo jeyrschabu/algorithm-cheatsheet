@@ -33,7 +33,7 @@ int rank(int[] array, int left, int right, int rank) {
 int partition(int[] array, int left, int right, int pivot) {
     while (true) {
         while (left <= right && array[left] <= pivot) left++;
-        while (left <= right && array[right] > pivot) right++;
+        while (left <= right && array[right] > pivot) right--;
         if (left > right) return left -1;
         swap(array, left, right)
     }
