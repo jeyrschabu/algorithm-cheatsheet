@@ -8,15 +8,21 @@ class MinHeap {
     int[] heap;
     int maxSize;
     int counter = 0;
-    static final int FRONT = 1; 
+    static final int FRONT = 1;
     MinHeap(int maxSize) {
         this.maxSize = maxSize;
         heap = new heap[maxSize + 1];
         heap[0] = Integer.MIN_VALUE;
     }
-    int parent(int position) { return position / 2; }
-    int left(int position) { return position * 2; }
-    int right(int position) { return position * 2 + 1}
+    int parent(int position) { 
+        return position / 2; 
+    }
+    int left(int position) { 
+        return position * 2; 
+    }
+    int right(int position) { 
+        return position * 2 + 1;
+    }
     boolean isLeaf(int position) {
         return (position >= counter/2 && position <= counter)
     }
