@@ -53,6 +53,25 @@ class MinHeap {
             }
         }
     }
+    void extractMin() {
+        if (counter == 0) return Integer.MAX_VALUE;
+        int root = heap[0];
+        if (counter > 1) {
+            heap[0] = heap[counter - 1];
+        }
+        counter--;
+    }
 }
 ```
 [/MINHEAP]
+
+[KTH SMALLEST]
+```
+int kthSmallest(int a[], int n, int k) {
+   //build the heap and use the insert method mh
+   for (int i=0; i < k-1; i++)
+        mh.extractMin();
+   return mh.getMin();
+}
+```
+[/KTH SMALLEST]
