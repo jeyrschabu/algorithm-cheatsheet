@@ -6,6 +6,7 @@ Implementations:
 [QUICKSORT]
 
 ```
+//O(n log n)
 void quickSort(int a[], int left, int right) {
       int index = partition(a, left, right);
       if (left < index - 1)
