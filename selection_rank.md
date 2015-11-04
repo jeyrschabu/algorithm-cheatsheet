@@ -35,7 +35,7 @@ int partition(int[] array, int left, int right, int pivot) {
         while (left <= right && array[left] <= pivot) left++;
         while (left <= right && array[right] > pivot) right--;
         if (left > right) return left -1;
-        swap(array, left, right)
+        swap(array, left, right);
     }
 }
 ```
