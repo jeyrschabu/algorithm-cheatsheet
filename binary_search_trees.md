@@ -140,3 +140,22 @@ void insert(Node root, Node n) {
 ```
 [/INSERT]
 
+[DELETE]
+```
+Node delete(Node root, int key) {
+    if (root == null) return root;
+    if (key < root.key) root.left = deleteNode(root.left, key);
+    else if (key > root.key) root.right = deleteNode(root.right, key);
+    else {
+        if (root.left == null)
+            return root.right;
+        else if (root.right == null)
+            return root.left;
+        root.key = min(root.right);
+        // Delete the inorder successor
+        root.right = delete(root.right, root.key);
+    }
+}
+```
+[/DELETE]
+
