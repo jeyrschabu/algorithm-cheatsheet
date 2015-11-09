@@ -3,6 +3,7 @@ Graph
 
 NOTES:
 - Breadth First Search: O(m + n) where m is the number of edges and n the number of vertices
+- Depth First Search
 
 ```
 class Node {
@@ -24,6 +25,14 @@ void bfs(Node root) {
                 current.visited = true;
                 queue.add(current);
             }
+        }
+    }
+}
+void dfs(Node root) {
+    root.visited = true;
+    for (Node i in root.items) {
+        if (!i.visited) {
+            dfs(i);
         }
     }
 }
