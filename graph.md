@@ -60,5 +60,49 @@ void dijkstra(int graph[][], int source) {
     //print the distance from source
     for (int i = 0; i < TOTAL; i++) S.O.P(distance[i]);
 }
+Integer [][] bellmanFord(Integer[][] weight, int source) throws Exception {
+    final int SIZE = weight.length;
+    final int EVE = -1;//to indicate no predecessor
+    final int INFINITY = Integer.MAX_VALUE;
+    //initialize
+    Integer[] pred = new Integer[SIZE];
+    Integer[] minDist = new Integer[SIZE];
+    Arrays.fill(pred, EVE);
+    Arrays.fill(minDist, INFINITY);
+    //set minDist[source] = 0 because source is 0 distance from itself.
+    minDist[source] = 0;
+    //relax the edge set V-1 times to find all shortest paths
+    for (int i = 1; i < minDist.length - 1; i++) {
+      for (int v = 0; v < SIZE; v++) {
+        for (int x : adjacency(weight, v)) {
+          if (minDist[x] > minDist[v] + weight[v][x]) {
+            minDist[x] = minDist[v] + weight[v][x];
+            pred[x] = v;
+          }
+        }
+      }
+    }
+    //detect cycles if any
+    for (int v = 0; v < SIZE; v++) {
+      for (int x : adjacency(weight, v)) {
+        if (minDist[x] > minDist[v] + weight[v][x]) {
+          throw new Exception("Negative cycle found");
+        }
+      }
+    }
+    Integer[][] result = {pred, minDist};
+    return result;
+  }
+  List<Integer> adjacency(Integer[][] graph, int v) {
+    List<Integer> result = new ArrayList<Integer>();
+    for (int x = 0; x < graph.length; x++) {
+      if (graph[v][x] != null) {
+        result.add(x);
+      }
+    }
+    return result;
+  }
 ```
 [/SHORTESTPATH]
+
+[]
