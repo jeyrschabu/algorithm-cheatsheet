@@ -37,8 +37,9 @@ void dfs(Node root) {
     }
 }
 ```
+- Single Source Shortest Path
 
-[SHORTESTPATH]
+[DIJKSTRA]
 ```
 void dijkstra(int graph[][], int source) {
     int distance[] = new int[TOTAL];
@@ -60,6 +61,11 @@ void dijkstra(int graph[][], int source) {
     //print the distance from source
     for (int i = 0; i < TOTAL; i++) S.O.P(distance[i]);
 }
+```
+[/DIJKSTRA]
+
+[BELLMANFORD]
+```
 Integer [][] bellmanFord(Integer[][] weight, int source) throws Exception {
     final int SIZE = weight.length;
     final int EVE = -1;//to indicate no predecessor
@@ -103,6 +109,4 @@ Integer [][] bellmanFord(Integer[][] weight, int source) throws Exception {
     return result;
   }
 ```
-[/SHORTESTPATH]
-
-[]
+[/BELLMANFORD]
