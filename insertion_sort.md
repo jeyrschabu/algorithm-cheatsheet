@@ -11,10 +11,16 @@ Implementations:
 //O(n2) comparisons and swaps
 //Adaptive: O(n) time when nearly sorted
 //Very low overhead
-for i = 2:n,
-    for (k = i; k > 1 and a[k] < a[k-1]; k--) 
-        swap a[k,k-1]
-    → invariant: a[1..i] is sorted
-end
+void insertionSort(int [] numbers) {
+    for(int i = 1; i < numbers.length; i++) {
+        int val = numbers[i];
+        int j = i - 1;
+        while(j >= 0 && numbers[j] > val){
+            numbers[j + 1] = numbers[j];
+            j--;
+        }
+        numbers[j + 1] = val;
+    }
+}
 ```
 [/INSERTIONSORT]
