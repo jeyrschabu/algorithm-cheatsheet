@@ -6,7 +6,7 @@ Implementations:
 [BINARYSEARCH]
 
 ```
-int binarySearch(int numbers[], int key, int low, int high){
+int binarySearch(int numbers[], int key, int low, int high) {
     if (low > high) return -1;
     int middle = (high + low)/2; 
     if(numbers[middle] == key) return middle;
