@@ -28,11 +28,17 @@ void bfs(Node root) {
         }
     }
 }
-void dfs(Node root) {
-    root.visited = true;
-    for (Node i in root.items) {
-        if (!i.visited) {
-            dfs(i);
+void dfs(Node start) {
+    Stack<Node> stack = new Stack<Node>();
+    start.visited = true
+    stack.push(start);
+    while (!stack.isEmpty()) {
+        Node p = stack.pop();
+        for (Node a : p.list) {
+            if (!a.visited) {
+                stack.push(a);
+                dfs(a);
+            }
         }
     }
 }
