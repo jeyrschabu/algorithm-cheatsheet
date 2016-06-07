@@ -37,10 +37,9 @@ void add(Node head, int data) {
 		current = new Node(data, null);
 		head = current;
 	} else {
-
-	      while(current.next != null) current = current.next;
-	      current.next = new Node(data, null);
-        }
+	  	while(current.next != null) current = current.next;
+	  	current.next = new Node(data, null);
+	}
 }
 ```
 - recursive
