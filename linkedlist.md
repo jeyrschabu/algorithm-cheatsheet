@@ -107,6 +107,7 @@ boolean remove(Node head, int data) {
 	}
 	if (current == null) return false;
 	previous.next = current.next;
+	return true;
 }
 ```
 
