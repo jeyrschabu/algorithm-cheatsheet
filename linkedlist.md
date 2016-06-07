@@ -20,7 +20,7 @@ LinkedList
 class Node {
 	int data;
 	Node next;
-	public Node(int data){
+	public Node(int data) {
 		this.data = data;
 		this.next = null;
 	}
@@ -36,9 +36,11 @@ void add(Node head, int data) {
 	if (current == null) {
 		current = new Node(data, null);
 		head = current;
-	}
-	while(current.next != null) current = current.next;
-	current.next = new Node(data, null);
+	} else {
+
+	      while(current.next != null) current = current.next;
+	      current.next = new Node(data, null);
+        }
 }
 ```
 - recursive
