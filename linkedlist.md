@@ -73,7 +73,7 @@ void addFirst(int data, Node head) {
 boolean search(Node head, int data) {
 	Node  current = head;
 	if (current == null) return false;
-	if (current.data = data) return true;
+	if (current.data == data) return true;
 	return search(current.next, data);
 }
 ```
@@ -147,6 +147,16 @@ Node reverse(Node head) {
 	}
 	head = previous;
 	return head;
+}
+
+Node reverse(Node head) {
+    if (head == null || head.next == null) return head;
+    Node remain = reverse(head.next);
+    Node current = remain;
+    while(current.next != null) current = current.next;
+    current.next = head;
+    head.next = null;
+    return remain;
 }
 ```
 

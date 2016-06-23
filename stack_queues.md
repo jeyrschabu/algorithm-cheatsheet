@@ -62,5 +62,65 @@ class Stack {
 	}
 }
 
-SUMMARY:
-	1. 	void add(Node head, int data)
+Implementation #1: Using an Array
+interface Queue<T> {
+    void enqueue(T data);
+    T dequeue();
+    boolean isEmpty();
+}
+
+class Queue<T> implements Queue<T> {
+    T[] data;
+    int first, last = 0;
+    int defaultSize = 10;
+    Queue() {
+        data = new T[defaultSize];
+    }
+    boolean isEmpty() {
+        return last == 0;
+    }
+    int size() {
+        return last + 1;
+    }
+    void resize() {
+        T[] tmp = new T[data.length * 2];
+        int i = 0;
+        Arrays.fill(tmp, data[i++]);
+        data = tmp;
+    }
+    void enqueue(T data) {
+        if (last >= data.length -1 ) {
+            resize();
+        }
+        data[last++];
+    }
+    T dequeue() {
+        if (isEmpty()) return null;
+        return data[first++];
+    }
+}
+
+Implementation #2: Using a Linked list
+class Queue<T> {
+    class Node {
+        T data;
+        Node next;
+    }
+    Node first, last;
+    int total;
+    void enqueue(T data) {
+        Node current = last;
+        last = new Node();
+        last.data = data;
+        if (total++ == 0 ) first = last;
+        else current.next = last;
+    }
+    T dequeue() {
+        if (total <= 0) return null;
+        T data = first.data;
+        first = first.next;
+        if (--total == 0) last = null;
+        return data;
+    }
+}
+```
