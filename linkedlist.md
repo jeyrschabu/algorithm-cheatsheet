@@ -342,14 +342,11 @@ Node partitionList(Node head, int data){
 
 ```
 Node sumTwoLists(Node first, Node last) {
-	Node res = null;
-	Node tmp, prev = null;
+	Node res = null, prev = null, tmp;
 	int carry = 0; sum;
-	while (first != null && second != null) {
-		int left = (first != null ) ? first.data : 0;
-		int right = (last != null ) ? last.data : 0;
-		sum  = left + right + carry;
-		carry = (sum >= 0) ? 1 : 0;
+	while (first != null && last != null) {
+		sum  = (first.data + last.data + carry;
+		carry = (sum >= 10) ? 1 : 0;
 		sum %=10;
 		tmp = new Node(sum);
 		if (res == null) {
@@ -358,8 +355,8 @@ Node sumTwoLists(Node first, Node last) {
 			prev.next = tmp;
 		}
 		prev = tmp;
-		if (first != null) first = first.next;
-		if (last != null) last = last.next;
+		first = first.next;
+		last = last.next;
 	}
 	if (carry > 0) tmp.next = new Node(carry);
 	return res;
