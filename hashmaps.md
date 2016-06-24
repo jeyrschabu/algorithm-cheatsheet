@@ -9,34 +9,62 @@ NOTES:
 Implementations (integer dictionary):
 
 ```
-public class HashMap {
-    private final static int TABLE_SIZE = 128;
-    HashEntry[] table;
-    HashMap() {
-        table = new HashEntry[TABLE_SIZE];
-        for (int i = 0; i < TABLE_SIZE; i++)
-            table[i] = -1;
-    }
-    public int get(int key) {
-        int hash = (key % TABLE_SIZE);
-        while (table[hash] != null && table[hash].key != key)
-            hash = (hash + 1) % TABLE_SIZE;
-        return (table[hash] == null) ? return -1 : return table[hash].value;
-    }
-    public void put(int key, int value) {
-        int hash = (key % TABLE_SIZE);
-        while (table[hash] != null && table[hash].key != key)
-            hash = (hash + 1) % TABLE_SIZE;
-            table[hash] = new HashEntry(key, value);
-    }
-    static class HashEntry{
-        int key;
-        int value;
-        public HashEntry(int key, int value){
-            this.key = key;
-            this.value = value;
+class HashMap <K, V> {
+	private Entry[] table;
+	int total;
+	class Entry {
+		K key;
+		V value;
+		Entry(K key, V value) {
+			this.key = key;
+			this.value = value;
+		}
+	}
+	HashMap() {
+		table = new Entry[10];
+		total = 0;
+	}
+	void resize() {
+		Entry [] tmp = new Entry[table.length * 2];
+		int i = 0;
+		Arrays.fill(tmp, table[i++]);
+		table = tmp;
+	}
+	boolean containsKey(Key key) {
+		int hash = key.hashCode() % total;
+		while (table[hash] != null && table[hash].key != key) {
+			hash = (hash + 1) % total;
+		}
+		return Objects.equals(table[hash].key, key);
+	}
+    boolean remove(Key key) {
+        int hash = key.hashCode() % total;
+        while (table[hash] != null && table[hash].key != key) {
+            hash = (hash + 1) % total;
         }
+        if (Objects.equals(table[total].key, key)) {
+            table[total--] = null;
+            return true;
+        }
+        return false;
     }
+	void put(K key, V value) {
+		if (total++ >= table.length - 1) {
+			resize();
+		}
+		int hash = key.hashCode() % total;
+		while (table[hash] != null && table[hash].key != key) {
+			hash = (hash + 1) % total;
+		}
+		table[hash] = new Entry(key, value);
+	}
+	void get(K key) {
+		int hash = key.hashCode() % total;
+		while (table[hash] != null && table[hash].key != key) {
+			hash = (hash + 1) % total;
+		}
+		return table[hash];
+	}	
 }
 ```
 
@@ -48,18 +76,21 @@ class HashMap<K, V> {
     Entry[] table;
     HashMap() {
         table = new Entry[MAX];
-        for (int i =0; i < MAX; i++) {
-            table[i] = null;
-        }
     }
     void put(K key, V value) {
         int hash = key.hashCode() % MAX;
-        if (table[hash] == null) table[hash] = new Node(key, value, null);
-        else {
+        if (table[hash] == null) {
+            table[hash] = new Node(key, value, null);
+        } else {
             Node current = table[hash];
-            while (current.next != null && current.key != key) current = current.next;
-            if (current.key == key) current.value = value;
-            else current.next = new Node(key, value, null);
+            while (current.next != null && current.key != key) {
+                current = current.next;
+            }
+            if (current.key == key) 
+                current.value = value;
+            }else {
+                current.next = new Node(key, value, null);
+            }
         }
     }
     V get(K key) {
@@ -83,7 +114,7 @@ class HashMap<K, V> {
             else previous.next = current.next;
         }
     }
-    static class Node<K, V> {
+    class Node {
         K key;
         V value;
         Node next;
