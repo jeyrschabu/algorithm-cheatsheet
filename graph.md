@@ -15,10 +15,9 @@ class Node { //using adjacency list
 void bfs(Node root) {
     List<Integer> queue = new LinkedList<>();
     root.visited = true;
-    queue.add(root);
-    Node current;
+    queue.enqueue(root);
     while (!queue.isEmpty()) {
-        current = queue.poll();
+        Node current = queue.dequeue();
         current.print();
         for (Node i in current.list) {
             if (!i.visited) {
@@ -29,18 +28,29 @@ void bfs(Node root) {
     }
 }
 void dfs(Node start) {
-    Stack<Node> stack = new Stack<Node>();
+    if (start == null) return;
     start.visited = true
-    stack.push(start);
-    while (!stack.isEmpty()) {
-        Node p = stack.pop();
-        for (Node a : p.list) {
-            if (!a.visited) {
-                stack.push(a);
-                dfs(a);
-            }
+    for (Node a : p.list) {
+        if (!a.visited) {
+            dfs(a);
+        }
+    }   
+}
+boolean isReachable(List<Node> nodes, Node source, Node target) {
+    List<Node> queue = new LinkedList<>();
+    for (Node n : nodes) 
+        n.visited = true;
+    source.visited = true;
+    queue.add(source);
+    while(!queue.isEmpty()) {
+        Node current = queue.dequeue();
+        for (Node n : current.list) {
+            if (!n.visited && n.equals(target) return true;
+            n.visited = true;
+            queue.enqueue(n);
         }
     }
+    return false;
 }
 ```
 - Single Source Shortest Path
