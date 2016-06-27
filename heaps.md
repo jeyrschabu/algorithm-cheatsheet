@@ -10,7 +10,7 @@ void maxHeapify(int arr, int i, int size) {
         largestIndex = leftIndex;
     if (rightIndex < size && arr[rightIndex] > arr[i])
         largestIndex = rightIndex;
-    if (largest != i) {
+    if (largestIndex != i) {
         swap(arr[i], arr[largestIndex]);
         maxHeapify(arr, largestIndex, size);
     }
@@ -21,7 +21,7 @@ void swap(int i, int j, int arr[]) {
     arr[j] = tmp;
 }
 void buildMaxHeap(int [] arr) {
-    for (int i = arr.length/2; i >0; i--) 
+    for (int i = arr.length/2; i > 0; i--) 
         maxHeapify(arr, i, arr.length);
 }
 ```
@@ -42,14 +42,9 @@ void minHeapify(int arr[], int i, int size) {
         minHeapify(arr, smallestIndex, size);
     }
 }
-void swap(int i, int j, int arr[]) {
-    int tmp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = tmp;
-}
 void buildMinHeap(int [] arr) {
     for (int i = arr.length/2; i >0; i--) 
-        maxHeapify(arr, i);
+        maxHeapify(arr, i, arr.length);
 }
 ```
 [/MINHEAP]
@@ -60,7 +55,7 @@ O(nlgn)
 void heapSort(int arr[]) {
     int size = arr.length;
     buildMaxHeap(arr);
-    for (int i = arr.length -1; i >= 1; i--){
+    for (int i = arr.length - 1; i >= 1; i--){
         swap(0, i, arr);
         maxHeapify(arr, 0, size--);
     }
