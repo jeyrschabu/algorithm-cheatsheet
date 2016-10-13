@@ -53,10 +53,11 @@ class Trie {
     }
     boolean search(String word) {
         Node node = search(word);
-        return node == null && node.isLeaf;
+        return node != null && node.isLeaf;
     }
     boolean startsWith(String word) {
-        return node == null;
+        Node node = search(word);
+        return node != null;
     }
 }
 ```
