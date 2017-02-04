@@ -1,4 +1,4 @@
-LinkedList
+###LinkedList
 ==========
 
 - void add(Node head, int data)
@@ -16,7 +16,7 @@ LinkedList
 - Node firstNodeInLoop(Node head)
 - boolean isPalindrome(Node head)
 
-```
+```java
 class Node {
 	int data;
 	Node next;
@@ -30,21 +30,24 @@ class Node {
 [ADD]
 
 - iterative
-```
+```java
 void add(Node head, int data) {
 	Node current = head;
 	if (current == null) {
 		current = new Node(data, null);
 		head = current;
 	} else {
-	  	while(current.next != null) current = current.next;
+	  	while (current.next != null) {
+	  		current = current.next;
+	  	}
+
 	  	current.next = new Node(data, null);
 	}
 }
 ```
 - recursive
 
-```
+```java
 void add(Node head, int data) {
 	Node current = head; 
 	if (current == null) {
@@ -52,11 +55,12 @@ void add(Node head, int data) {
 		head = current;
 		return;
 	}
+
 	add(current.next, data);
 }
 ```
 
-```
+```java
 //add first
 void addFirst(int data, Node head) {
 	Node current = new Node(data);
@@ -68,17 +72,23 @@ void addFirst(int data, Node head) {
 [/ADD]
 
 [SEARCH]
-```
+```java
 //Recursive
 boolean search(Node head, int data) {
 	Node  current = head;
-	if (current == null) return false;
-	if (current.data == data) return true;
+	if (current == null) {
+		return false;
+	}
+
+	if (current.data == data) {
+		return true;
+	}
+
 	return search(current.next, data);
 }
 ```
 
-```
+```java
 //Iterative
 boolean search(Node head, int data) {
 	boolean found = false;
@@ -86,6 +96,7 @@ boolean search(Node head, int data) {
 	while (current != null && current.data != data) {
 		current = current.next;
 	}
+
 	return current != null;
 }
 ```
@@ -94,29 +105,42 @@ boolean search(Node head, int data) {
 
 [REMOVE]
 
-```
+```java
 //iterative
 boolean remove(Node head, int data) {
-	if (head == null) return false;
-	if (head.data == data) head = head.next;
+	if (head == null) {
+		return false;
+	}
+
+	if (head.data == data) {
+		head = head.next;
+	}
+
 	Node current = head;
 	Node previous = null;
-	while(current != null && current.data != data) {
+	while (current != null && current.data != data) {
 		previous = current;
 		current = current.next;
 	}
-	if (current == null) return false;
+
+	if (current == null) {
+		return false;
+	}
+
 	previous.next = current.next;
 	return true;
 }
 ```
 
-```
+```java
 //recursive
 boolean remove(Node head, Node previous, int data) {
 	Node current = head;
-	if(current == null) return false;
-	if(current.data == data ) {
+	if (current == null) {
+		return false;
+	}
+
+	if (current.data == data ) {
 		if (previous == null) {
 			current = current.next;
 			head = current;
@@ -125,6 +149,7 @@ boolean remove(Node head, Node previous, int data) {
 			previous.next = current.next;
 		}
 	}
+
 	return remove(current, current.next, data);
 }
 ```
@@ -133,7 +158,7 @@ boolean remove(Node head, Node previous, int data) {
 
 [REVERSE]
 
-```
+```java
 //iterative
 Node reverse(Node head) {
 	Node current = head;
@@ -145,25 +170,35 @@ Node reverse(Node head) {
 		previous = current;
 		current = next;
 	}
+
 	head = previous;
 	return head;
 }
 
 Node reverse(Node head) {
-    if (head == null || head.next == null) return head;
+    if (head == null || head.next == null) {
+    	return head;
+    }
+
     Node remain = reverse(head.next);
     Node current = remain;
-    while(current.next != null) current = current.next;
+    while (current.next != null) {
+    	current = current.next;
+    }
+
     current.next = head;
     head.next = null;
     return remain;
 }
 ```
 
-```
+```java
 //recursive
 Node reverse(Node head) {
-	if ( head == null || n.next == null) return head;
+	if ( head == null || n.next == null) {
+		return head;
+	}
+
 	Node r = reverse(head.next);
 	head.next.next = head;
 	head.next = null;
@@ -174,25 +209,30 @@ Node reverse(Node head) {
 
 [GET Nth TO LAST]
 
-```
+```java
 //runner pointer method
 Node getNthToLast(Node head, int n) {
 	Node p1 = head;
 	Node p2 = head;
 	int count = 0;
 	while (count++ < n) {
-		if(p2 == null) return;
+		if (p2 == null) {
+			return;
+		}
+
 		p2 = p2.next;
 	}
+
 	while (p2 != null) {
 		p1 = p1.next;
 		p2 = p2.next;
 	}
+
 	return p1;
 }
 ```
 
-```
+```java
 //version 2: get the length of the list and get the offset with n
 Node getNthToLast(Node head, int n) {
 	int len = 0;
@@ -201,10 +241,16 @@ Node getNthToLast(Node head, int n) {
 		++len;
 		current = current.next;
 	}
+
 	current = head;
-	if (len < n) return;
+	if (len < n) {
+		return;
+	}
+
 	int offSet = len - n + 1;
-	for (int i = 0; i < offSet; i++) current = current.next;
+	for (int i = 0; i < offSet; i++) {
+		current = current.next;
+	}
 	return current;
 }
 ```
@@ -212,15 +258,19 @@ Node getNthToLast(Node head, int n) {
 
 [REVERSE Nth TO LAST]
 
-```
+```java
 Node reverseNthNodeFromLast(Node head, int n) {
 	//first find the nth node (see getNthToLast)
 	int counter = 0, i = 0;
 	Node p1 = head, p2 = head;
 	while (counter++ < n) {
-		if (p2 == null) return null;
+		if (p2 == null) {
+			return null;
+		}
+
 		p2 = p2.next;
 	}
+
 	while (p2 != null) {
 		p1 = p1.next;
 		p2 = p2.next;
@@ -235,10 +285,15 @@ Node reverseNthNodeFromLast(Node head, int n) {
 		current = next;
 	}
 	current = previous;
-	if (i <= 0) return current;
+	if (i <= 0) {
+		return current;
+	}
 	//attach the beginning of the lost to the reverse position
 	Node tmp = head;
-	while (--i > 0) tmp = tmp.next;
+	while (--i > 0) {
+		tmp = tmp.next;
+	}
+
 	tmp.next = current;
 	return head;
 }
@@ -248,7 +303,7 @@ Node reverseNthNodeFromLast(Node head, int n) {
 
 [MERGE TWO SORTED LIST]
 
-```
+```java
 //iterative
 Node mergeSortedList(Node l1, Node l2) {
 	Node p1 = l1, p2 = l2;
@@ -262,20 +317,34 @@ Node mergeSortedList(Node l1, Node l2) {
 			p.next = p2;
 			p2 = p2.next;
 		}
+
 		p = p.next;
 	}
-	if (p1 != null) p.next = p1;
-	if (p2 != null) p.next = p2;
+
+	if (p1 != null) {
+		p.next = p1;
+	}
+
+	if (p2 != null) {
+		p.next = p2;
+	}
+
 	return fakeHead;
 }
 ```
 
-```
+```java
 //recursive (more intuitive)
 Node mergeSortedList(Node l1, Node l2) {
 	Node result = null;
-	if (l1 == null) return l2;
-	if (l2 == null) return l1;	
+	if (l1 == null) {
+		return l2;
+	}
+
+	if (l2 == null) {
+		return l1;	
+	}
+
 	if (l1.data <= l2.data) {
 		result = l1;
 		result.next = mergeSortedList(l1.next, l2);
@@ -283,6 +352,7 @@ Node mergeSortedList(Node l1, Node l2) {
 		result = l2;
 		result.next = mergeSortedList(l1, l2.next);
 	}
+
 	return result;
 }
 ```
@@ -290,13 +360,18 @@ Node mergeSortedList(Node l1, Node l2) {
 [/MERGE TWO SORTED LIST]
 
 [REMOVE DUPS]
-```
+```java
 //Note: this can written using a while loop as well, the same approach can be used to detect dups. 
 //The method would return a boolean
 Node removeDuplicates(Node head) {
-	for (Node i = head, i != null ; i = i.next)
-		for (Node j = i.next; j != null; j = j.next)
-			if (i.data == j.data) i.next = j.next;
+	for (Node i = head, i != null ; i = i.next) {
+		for (Node j = i.next; j != null; j = j.next) {
+			if (i.data == j.data) { 
+				i.next = j.next; 
+			}
+		}
+	}
+	
 	return head;
 }
 ```

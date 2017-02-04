@@ -1,25 +1,26 @@
-Graph
+###Graph
 ==========
 
 NOTES:
 - Breadth First Search: O(m + n) where m is the number of edges and n the number of vertices
 - Depth First Search
 
-```
+```java
 class Node { //using adjacency list
     int data;
     boolean visited;
-    List<Node> items;
-    void print() {}
+    List<Node> list = new ArrayList<>();
+    void print() {};
 }
+
 void bfs(Node root) {
-    List<Integer> queue = new LinkedList<>();
+    Queue<Integer> queue = new LinkedList<>();
     root.visited = true;
-    queue.enqueue(root);
+    queue.add(root);
     while (!queue.isEmpty()) {
-        Node current = queue.dequeue();
+        Node current = queue.poll();
         current.print();
-        for (Node i in current.list) {
+        for (Node i : current.list) {
             if (!i.visited) {
                 current.visited = true;
                 queue.add(current);
@@ -27,36 +28,108 @@ void bfs(Node root) {
         }
     }
 }
+
+int connectedComponents(List<Node> nodes) {
+    int count = 0;
+
+    for (Node n : nodes) {
+        n.visited = false;
+    }
+
+    for (Node n : nodes) {
+        if (!n.visited) {
+            count++;
+            bfs(n);
+        }
+    }
+
+    return count;
+}
+
 void dfs(Node start) {
-    if (start == null) return;
-    start.visited = true
-    for (Node a : p.list) {
+    if (start == null) {
+        return;
+    }
+
+    start.visited = true;
+    for (Node a : start.list) {
         if (!a.visited) {
             dfs(a);
         }
     }   
 }
+
 boolean isReachable(List<Node> nodes, Node source, Node target) {
     List<Node> queue = new LinkedList<>();
-    for (Node n : nodes) 
-        n.visited = true;
+    for (Node n : nodes) {
+        n.visited = false;
+    }
+
     source.visited = true;
     queue.add(source);
-    while(!queue.isEmpty()) {
-        Node current = queue.dequeue();
+    while (!queue.isEmpty()) {
+        Node current = queue.poll();
         for (Node n : current.list) {
-            if (!n.visited && n.equals(target) return true;
+            if (!n.visited && n.equals(target)) {
+                return true;
+            }
+
             n.visited = true;
-            queue.enqueue(n);
+            queue.add(n);
         }
     }
+
     return false;
 }
 ```
-- Single Source Shortest Path
 
-[DIJKSTRA]
+###DAGs
+
+```java
+enum Color {
+    GRAY,
+    BLACK
+}
+
+void topSort(List<Node> nodes) {
+    List<Node> sorted = new ArrayList<>();
+    Map<Node, Color> state = new HashMap<>();
+    Set<Node> path = new LinkedHashSet<>();
+    List<Set<Node>> paths = new ArrayList<>();
+
+    for (Node n : nodes) {
+        dfs(n, sorted, state, path, paths);
+    }
+}
+
+void dfs(Node node, 
+         List<Node> sorted, 
+         Map<Node, Color> state, 
+         Set<Node> path,
+         List<Set<Node>> paths) {
+
+    state.put(node, Color.GRAY);
+    path.add(node);
+
+    for (Node n : node.list) {
+        Color color = state.get(n);
+        if (color == GRAY) throw new IllegalStateException("Cycle Detection");
+        if (color == BLACK) continue;
+        path.add(n);
+        Set<Node> newPath = new LinkedHashSet<>(path);
+        dfs(n, sorted, state, new LinkedHashSet(newPath));
+    }
+
+    state.put(node, Color.BLACK);
+    sorted.add(node);
+    paths.add(path);
+}
+
 ```
+
+###Single Source Shortest Path
+
+```java
 void dijkstra(int graph[][], int source) {
     int distance[] = new int[TOTAL];
     Boolean shortestPaths = new Boolean[TOTAL];
@@ -64,6 +137,7 @@ void dijkstra(int graph[][], int source) {
         distance[i] = Integer.MAX_VALUE;
         shortestPaths[i] = false;
     }
+
     distance[source] = 0;
     for (int i = 0; i < TOTAL; i++) {
         int current = minDistance(distance, shortestPaths);
@@ -75,13 +149,11 @@ void dijkstra(int graph[][], int source) {
         }
     }
     //print the distance from source
-    for (int i = 0; i < TOTAL; i++) S.O.P(distance[i]);
+    for (int i = 0; i < TOTAL; i++) {
+        System.out.println(distance[i]);
+    }
 }
-```
-[/DIJKSTRA]
 
-[BELLMANFORD]
-```
 Integer [][] bellmanFord(Integer[][] weight, int source) throws Exception {
     final int SIZE = weight.length;
     final int EVE = -1;//to indicate no predecessor
@@ -125,4 +197,3 @@ Integer [][] bellmanFord(Integer[][] weight, int source) throws Exception {
     return result;
   }
 ```
-[/BELLMANFORD]
