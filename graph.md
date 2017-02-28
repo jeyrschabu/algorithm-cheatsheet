@@ -96,9 +96,12 @@ void topSort(List<Node> nodes) {
     Map<Node, Color> state = new HashMap<>();
     Set<Node> path = new LinkedHashSet<>();
     List<Set<Node>> paths = new ArrayList<>();
+    for (Node n : nodes) {
+        outOrder.put(n, 0);
+    }
 
     for (Node n : nodes) {
-        dfs(n, sorted, state, path, paths);
+        dfs(n, sorted, state, path, paths, outOrder);
     }
 }
 
@@ -106,7 +109,8 @@ void dfs(Node node,
          List<Node> sorted, 
          Map<Node, Color> state, 
          Set<Node> path,
-         List<Set<Node>> paths) {
+         List<Set<Node>> paths,
+         Map<String, Integer> outOrder) {
 
     state.put(node, Color.GRAY);
     path.add(node);
@@ -123,8 +127,12 @@ void dfs(Node node,
     state.put(node, Color.BLACK);
     sorted.add(node);
     paths.add(path);
-}
 
+    for (Node n : node.list) {
+        int out = outOrder.get(n);
+        outOrder(n, out + 1);
+    }
+}
 ```
 
 ###Single Source Shortest Path
