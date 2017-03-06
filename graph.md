@@ -133,6 +133,22 @@ void dfs(Node node,
         outOrder(n, out + 1);
     }
 }
+
+Map<String, Integer> getNodesOutOrder(List<Node> nodes) {
+    List<Node> sorted = new ArrayList<>();
+    Map<Node, Color> state = new HashMap<>();
+    Set<Node> path = new LinkedHashSet<>();
+    List<Set<Node>> paths = new ArrayList<>();
+    for (Node n : nodes) {
+        outOrder.put(n, 0);
+    }
+
+    for (Node n : nodes) {
+        dfs(n, sorted, state, path, paths, outOrder);
+    }
+    
+    return outOrder;
+}
 ```
 
 ###Single Source Shortest Path
