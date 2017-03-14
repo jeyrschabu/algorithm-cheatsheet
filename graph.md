@@ -15,8 +15,8 @@ class Node { //using adjacency list
 
 void bfs(Node root) {
     Queue<Integer> queue = new LinkedList<>();
-    root.visited = true;
     queue.add(root);
+    root.visited = true;
     while (!queue.isEmpty()) {
         Node current = queue.poll();
         current.print();
@@ -129,8 +129,7 @@ void dfs(Node node,
     paths.add(path);
 
     for (Node n : node.list) {
-        int out = outOrder.get(n);
-        outOrder(n, out + 1);
+        outOrder(n, outOrder.get(n) + 1);
     }
 }
 ```
@@ -140,7 +139,7 @@ void dfs(Node node,
 ```java
 void dijkstra(int graph[][], int source) {
     int distance[] = new int[TOTAL];
-    Boolean shortestPaths = new Boolean[TOTAL];
+    Boolean shortestPaths[] = new Boolean[TOTAL];
     for (int i = 0; i < TOTAL; i++) {
         distance[i] = Integer.MAX_VALUE;
         shortestPaths[i] = false;
