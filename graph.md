@@ -110,7 +110,7 @@ void dfs(Node node,
          Map<Node, Color> state, 
          Set<Node> path,
          List<Set<Node>> paths,
-         Map<String, Integer> outOrder) {
+         Map<Node, Integer> outOrder) {
 
     state.put(node, Color.GRAY);
     path.add(node);
@@ -133,7 +133,7 @@ void dfs(Node node,
     }
 }
 
-Map<String, Integer> getNodesOutOrder(List<Node> nodes) {
+Map<Node, Integer> getNodesOutOrder(List<Node> nodes) {
     List<Node> sorted = new ArrayList<>();
     Map<Node, Color> state = new HashMap<>();
     Set<Node> path = new LinkedHashSet<>();
@@ -147,6 +147,18 @@ Map<String, Integer> getNodesOutOrder(List<Node> nodes) {
     }
     
     return outOrder;
+}
+
+List<Node> getDAGLeafNodes(List<Node> nodes) {
+    Map<Node, Integer> nodeToOutOrder = getNodesOutOrder(nodes);
+    List<Node> leafs = new ArrayList<>();
+    for (Map.Entry<Node, Integer> m : nodeToOutOrder.entrySet()) {
+        if (m.getValue() == 0) {
+            leafs.add(m.getKey());
+        }
+    }
+
+    return leafs;
 }
 ```
 
