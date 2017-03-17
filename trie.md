@@ -2,7 +2,7 @@ Trie
 ========================
 
 Implementations:
-[Trie]
+
 ```java
 class Node {
     Character character;
@@ -68,4 +68,3 @@ class Trie {
     }
 }
 ```
-[/Trie]
