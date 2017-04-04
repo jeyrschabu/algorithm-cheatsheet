@@ -62,9 +62,62 @@ class Trie {
         Node node = search(word);
         return node != null && node.isLeaf;
     }
+    
     boolean startsWith(String word) {
         Node node = search(word);
         return node != null;
     }
 }
+```
+
+```python
+class Node:
+  def __init__(self, character):
+    self.character = character
+    self.children = {}
+    self.isLeaf = False
+    
+  def __repr__(self):
+    return self.character + " -> " + str(self.children)
+
+class Trie:
+  def __init__(self):
+    self.root = Node("")
+    
+  def __str__(self):
+    return str(self.root)
+    
+  def insert(self, word):
+    children = self.root.children
+    for index, c in enumerate(word):
+      current = None
+      if c in children.keys():
+        current = children[c]
+      else:
+        current = Node(c)
+        children[c] = current
+        
+      if index == len(word) - 1:
+          current.isLeaf = True
+        
+      children = current.children
+  
+  def search(self, word):
+    node = self.doSearch(word)
+    return node is not None and node.isLeaf
+    
+  def startsWith(self, word):
+    return self.doSearch(word) is not None
+    
+  def doSearch(self, word):
+    children = self.root.children
+    current = None
+    for c in word:
+      if c in children.keys():
+        current = children[c]
+        children = current.children
+      else:
+        current = None
+    
+    return current
 ```
