@@ -12,9 +12,7 @@ the number of elements on each side. (elements on left are smaller and elements 
 
 Implementations:
 
-[RANK]
-
-```
+```java
 // O(n)
 int rank(int[] array, int left, int right, int rank) {
     int random = random(left, right);
@@ -25,11 +23,7 @@ int rank(int[] array, int left, int right, int rank) {
     else if (rank < leftSide) return rank(array, left, leftEnd, rank);
     else return rank(array, leftEnd + 1, right, rank - leftSize);
 }
-```
-[/RANK]
 
-[PARTITION]
-```
 int partition(int[] array, int left, int right, int pivot) {
     while (true) {
         while (left <= right && array[left] <= pivot) left++;
@@ -39,4 +33,3 @@ int partition(int[] array, int left, int right, int pivot) {
     }
 }
 ```
-[/PARTITION]
