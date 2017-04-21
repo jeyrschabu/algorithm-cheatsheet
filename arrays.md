@@ -1,7 +1,7 @@
 Arrays
 ======
 
-```
+```java
 void mergeSortedArrays(int[] a, int[] b, int lastA, int lastB) {
 	int indexA = lastA -1;
 	int indexB = lastB -1;
@@ -17,6 +17,7 @@ void mergeSortedArrays(int[] a, int[] b, int lastA, int lastB) {
 			indexB--;
 		}
 	}
+	
 	while (indexB >=0) {
 		a[indexMerged] = b[indexB];
 		indexMerged--;
