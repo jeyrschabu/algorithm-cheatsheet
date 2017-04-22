@@ -19,16 +19,29 @@ int rank(int[] array, int left, int right, int rank) {
     int pivot = array[random];
     int leftEnd = partition(array, left, right, pivot); //partition
     int leftSize = leftEnd - left + 1;
-    if (leftSize == rank + 1) return Math.max(array[left], array[leftEnd]);
-    else if (rank < leftSide) return rank(array, left, leftEnd, rank);
-    else return rank(array, leftEnd + 1, right, rank - leftSize);
+    if (leftSize == rank + 1) {
+        return Math.max(array[left], array[leftEnd]);
+    } else if (rank < leftSide) {
+        return rank(array, left, leftEnd, rank);
+    } else {
+        return rank(array, leftEnd + 1, right, rank - leftSize);
+    }
 }
 
 int partition(int[] array, int left, int right, int pivot) {
     while (true) {
-        while (left <= right && array[left] <= pivot) left++;
-        while (left <= right && array[right] > pivot) right--;
-        if (left > right) return left -1;
+        while (left <= right && array[left] <= pivot) {
+            left++;
+        }
+
+        while (left <= right && array[right] > pivot) {
+            right--;
+        }
+
+        if (left > right) {
+            return left -1;
+        }
+        
         swap(array, left, right);
     }
 }
