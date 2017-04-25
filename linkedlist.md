@@ -25,12 +25,8 @@ class Node {
 		this.next = null;
 	}
 }
-```
 
-[ADD]
-
-- iterative
-```java
+//iterative
 void add(Node head, int data) {
 	Node current = head;
 	if (current == null) {
@@ -44,10 +40,8 @@ void add(Node head, int data) {
 	  	current.next = new Node(data, null);
 	}
 }
-```
-- recursive
 
-```java
+//recursive
 void add(Node head, int data) {
 	Node current = head; 
 	if (current == null) {
@@ -58,9 +52,7 @@ void add(Node head, int data) {
 
 	add(current.next, data);
 }
-```
 
-```java
 //add first
 void addFirst(int data, Node head) {
 	Node current = new Node(data);
@@ -68,11 +60,7 @@ void addFirst(int data, Node head) {
 	//update the head
 	head = current;
 }
-```
-[/ADD]
 
-[SEARCH]
-```java
 //Recursive
 boolean search(Node head, int data) {
 	Node  current = head;
@@ -86,9 +74,7 @@ boolean search(Node head, int data) {
 
 	return search(current.next, data);
 }
-```
 
-```java
 //Iterative
 boolean search(Node head, int data) {
 	boolean found = false;
@@ -99,13 +85,7 @@ boolean search(Node head, int data) {
 
 	return current != null;
 }
-```
 
-[/SEARCH]
-
-[REMOVE]
-
-```java
 //iterative
 boolean remove(Node head, int data) {
 	if (head == null) {
@@ -130,9 +110,7 @@ boolean remove(Node head, int data) {
 	previous.next = current.next;
 	return true;
 }
-```
 
-```java
 //recursive
 boolean remove(Node head, Node previous, int data) {
 	Node current = head;
@@ -152,13 +130,7 @@ boolean remove(Node head, Node previous, int data) {
 
 	return remove(current, current.next, data);
 }
-```
-[/REMOVE]
 
-
-[REVERSE]
-
-```java
 //iterative
 Node reverse(Node head) {
 	Node current = head;
@@ -190,9 +162,7 @@ Node reverse(Node head) {
     head.next = null;
     return remain;
 }
-```
 
-```java
 //recursive
 Node reverse(Node head) {
 	if ( head == null || n.next == null) {
@@ -204,12 +174,7 @@ Node reverse(Node head) {
 	head.next = null;
 	return r;
 }
-```
-[/REVERSE]
 
-[GET Nth TO LAST]
-
-```java
 //runner pointer method
 Node getNthToLast(Node head, int n) {
 	Node p1 = head;
@@ -230,9 +195,7 @@ Node getNthToLast(Node head, int n) {
 
 	return p1;
 }
-```
 
-```java
 //version 2: get the length of the list and get the offset with n
 Node getNthToLast(Node head, int n) {
 	int len = 0;
@@ -251,14 +214,10 @@ Node getNthToLast(Node head, int n) {
 	for (int i = 0; i < offSet; i++) {
 		current = current.next;
 	}
+	
 	return current;
 }
-```
-[/GET Nth TO LAST]
 
-[REVERSE Nth TO LAST]
-
-```java
 Node reverseNthNodeFromLast(Node head, int n) {
 	//first find the nth node (see getNthToLast)
 	int counter = 0, i = 0;
@@ -297,13 +256,7 @@ Node reverseNthNodeFromLast(Node head, int n) {
 	tmp.next = current;
 	return head;
 }
-```
 
-[/REVERSE Nth TO LAST]
-
-[MERGE TWO SORTED LIST]
-
-```java
 //iterative
 Node mergeSortedList(Node l1, Node l2) {
 	Node p1 = l1, p2 = l2;
@@ -331,9 +284,7 @@ Node mergeSortedList(Node l1, Node l2) {
 
 	return fakeHead;
 }
-```
 
-```java
 //recursive (more intuitive)
 Node mergeSortedList(Node l1, Node l2) {
 	Node result = null;
@@ -355,12 +306,7 @@ Node mergeSortedList(Node l1, Node l2) {
 
 	return result;
 }
-```
 
-[/MERGE TWO SORTED LIST]
-
-[REMOVE DUPS]
-```java
 //Note: this can written using a while loop as well, the same approach can be used to detect dups. 
 //The method would return a boolean
 Node removeDuplicates(Node head) {
@@ -374,12 +320,7 @@ Node removeDuplicates(Node head) {
 	
 	return head;
 }
-```
-[/REMOVE DUPS]
 
-[REMOVE RESTRICTED]
-
-```
 //Note: remove a node if only given access to that node
 //assumption: this is not the last node in the list
 boolean removeRestricted(Node node, int data) {
@@ -388,12 +329,7 @@ boolean removeRestricted(Node node, int data) {
 	node.next = next.next;
 	return true;
 }
-```
-[/REMOVE RESTRICTED]
 
-[PARTITION]
-
-```
 //Note: Create two separate lists that are sorted around data
 //Partition a list around x such that all nodes before are less than x and the ones after are greater than
 Node partitionList(Node head, int data){
@@ -416,16 +352,14 @@ Node partitionList(Node head, int data){
 	m = m.next;
 	//get l1 which uses n as a runner to link to m
 	Node tmp = l1;
-	while (tmp.next != null) tmp = tmp.next;
+	while (tmp.next != null) {
+		tmp = tmp.next;
+	}
+
 	tmp.next = m;
 	return l1;
 }
-```
-[/PARTITION]
 
-[SUM TWO LISTS]
-
-```
 Node sumTwoLists(Node first, Node last) {
 	Node res = null, prev = null, tmp;
 	int carry = 0; sum;
@@ -439,19 +373,19 @@ Node sumTwoLists(Node first, Node last) {
 		} else {
 			prev.next = tmp;
 		}
+
 		prev = tmp;
 		first = first.next;
 		last = last.next;
 	}
-	if (carry > 0) tmp.next = new Node(carry);
+
+	if (carry > 0) {
+		tmp.next = new Node(carry);
+	}
+
 	return res;
 }
-```
-[/SUM TWO LISTS]
 
-[HAS CYCLE]
-
-```
 //Note: using Floyd Cycle Detection Algorithm
 //given a finite set S with elements xi...xn
 //x0, x1 = f(x0), x2 = f(x1) ... xi = f(xi - 1)
@@ -463,16 +397,14 @@ boolean hasCycle(Node head) {
 	while (slow != null && fast.next != null) {
 		slow = slow.next;
 		fast = fast.next.next;
-		if (slow == fast) return true;
+		if (slow == fast) {
+			return true;
+		}
 	}
+
 	return false;
 }
-```
-[/HAS CYCLE]
 
-[FIRST NODE IN LOOP]
-
-```
 //Note : uses Floyd cycle detection algorithm, then advances the nodes correctly to detect the first node in the loop
 //returns null if there are no loops
 Node firstNodeInLoop(Node head) {
@@ -482,7 +414,11 @@ Node firstNodeInLoop(Node head) {
 		fast = fast.next.next;
 		if(slow == fast) break;
 	}
-	if (fast == null || fast.next == null) return null;
+
+	if (fast == null || fast.next == null) {
+		return null;
+	}
+
 	slow = head;
 	while (slow != fast) {
 		slow = slow.next;
@@ -490,12 +426,7 @@ Node firstNodeInLoop(Node head) {
 	}
 	return fast;
 }
-```
-[/FIRST NODE IN LOOP]
 
-[PALINDROME]
-
-```
 //Note: Solution #1 uses a stack as a buffer O(1) space, O(n) Complexity. Uses property of a stack: 
 // elements get popped up in reverse order from how they were inserted
 boolean isPalindrome(Node head) {
@@ -512,9 +443,7 @@ boolean isPalindrome(Node head) {
 	}
 	return true;
 }
-```
 
-```
 //Note: Solution #2 reverses the list from the middle and compare the two lists
 boolean isPalindrome(Node head) {
 	Node current = head;
@@ -523,9 +452,13 @@ boolean isPalindrome(Node head) {
 		current = current.next;
 		len++;
 	}
+
 	current = head;
 	int n = len/2, i = 0;
-	while (i++ <= n) current = current.next;
+	while (i++ <= n) {
+		current = current.next;
+	}
+
 	//now reverse it
 	Node previous = null, next;
 	while (current != null) {
@@ -534,13 +467,17 @@ boolean isPalindrome(Node head) {
 		previous = current;
 		current = next;
 	}
+
 	Node first = head, second = previous;
-	while(first != null && second != null){
-		if(first.data != second.data) return false;
+	while (first != null && second != null) {
+		if (first.data != second.data) {
+			return false;
+		}
+
 		first = first.next;
 		second = second.next;
 	}
+
 	return true;
 }
 ```
-[/PALINDROME]

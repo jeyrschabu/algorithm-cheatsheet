@@ -1,7 +1,7 @@
 # Algorithms cheatsheet
 
 Data structures and algorithms
-Sample code snippets, Pseudo code ect...
+Curated list of sample code snippets, Pseudo code ect...
 ```
 Graphs
 Hashtables

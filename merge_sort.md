@@ -3,17 +3,16 @@ Merge Algorithm
 
 Implementations:
 
-[MERGESORT]
-
-```
+```java
 void mergesort(int [] numbers, int low, int high) {
-    if(low < high){
+    if (low < high) {
         int middle = (low + high)/2;
         mergesort(numbers, low, middle);
         mergesort(numbers, middle + 1, high);
         merge(numbers, low, middle, high);
     }
 }
+
 void merge(int [] numbers, int low, int middle, int high) {
     int [] helper = new int[numbers.length];
     // Copy both parts into the helper array
@@ -41,4 +40,3 @@ void merge(int [] numbers, int low, int middle, int high) {
     }
   }
 ```
-[/MERGESORT]
