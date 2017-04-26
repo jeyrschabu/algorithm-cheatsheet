@@ -16,7 +16,10 @@ void mergesort(int [] numbers, int low, int high) {
 void merge(int [] numbers, int low, int middle, int high) {
     int [] helper = new int[numbers.length];
     // Copy both parts into the helper array
-    for (int i = low; i <= high; i++) helper[i] = numbers[i];
+    for (int i = low; i <= high; i++) {
+      helper[i] = numbers[i];
+    }
+    
     int i = low;
     int j = middle + 1;
     int k = low;
