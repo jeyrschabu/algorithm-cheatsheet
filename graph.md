@@ -1,4 +1,4 @@
-###Graph
+##Graph
 ==========
 
 NOTES:
@@ -10,7 +10,6 @@ class Node { //using adjacency list
     int data;
     boolean visited;
     List<Node> list = new ArrayList<>();
-    void print() {};
 }
 
 void bfs(Node root) {
@@ -19,7 +18,6 @@ void bfs(Node root) {
     root.visited = true;
     while (!queue.isEmpty()) {
         Node current = queue.poll();
-        current.print();
         for (Node i : current.list) {
             if (!i.visited) {
                 current.visited = true;
@@ -92,7 +90,7 @@ enum Color {
 }
 
 void topSort(List<Node> nodes) {
-    List<Node> sorted = new ArrayList<>();
+    List<Node> sorted = new ArrayList<>(); //will contain the sorted graph
     Map<Node, Color> state = new HashMap<>();
     Set<Node> path = new LinkedHashSet<>();
     List<Set<Node>> paths = new ArrayList<>();
@@ -117,17 +115,24 @@ void dfs(Node node,
 
     for (Node n : node.list) {
         Color color = state.get(n);
-        if (color == GRAY) throw new IllegalStateException("Cycle Detection");
-        if (color == BLACK) continue;
+        if (color == GRAY) {
+            throw new IllegalStateException("Cycle Detection");
+        }
+
+        if (color == BLACK) {
+            continue;
+        }
+
         path.add(n);
         Set<Node> newPath = new LinkedHashSet<>(path);
-        dfs(n, sorted, state, new LinkedHashSet(newPath));
+        dfs(n, sorted, state, new LinkedHashSet(newPath), paths, outOrder);
     }
 
     state.put(node, Color.BLACK);
     sorted.add(node);
     paths.add(path);
 
+    // update outorder
     for (Node n : node.list) {
         outOrder(n, outOrder.get(n) + 1);
     }
@@ -138,6 +143,7 @@ Map<Node, Integer> getNodesOutOrder(List<Node> nodes) {
     Map<Node, Color> state = new HashMap<>();
     Set<Node> path = new LinkedHashSet<>();
     List<Set<Node>> paths = new ArrayList<>();
+    // initialize
     for (Node n : nodes) {
         outOrder.put(n, 0);
     }
